@@ -22,6 +22,8 @@ class Solution {
     //     return bfss;
     // }
     
+    // Time complexity if approx. O(n^2) for loops
+    
     public int numIslands(char[][] grid) {
              
 
