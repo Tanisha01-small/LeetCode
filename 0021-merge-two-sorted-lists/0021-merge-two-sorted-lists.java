@@ -4,36 +4,50 @@
  *     int val;
  *     ListNode next;
  *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ *     ListNode(int value) { this.value = value; }
+ *     ListNode(int value, ListNode next) { this.value = value; this.next = next; }
  * }
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if(l1==null)return l2;
         if(l2==null)return l1;
-        // Let's assume that l1 is smaller than l2
-        if(l1.val>l2.val){
-            ListNode temp=l1;
-            l1=l2;
-            l2=temp;
+        
+        ListNode f=l1;
+        ListNode s=l2;
+        
+        ListNode result=new ListNode();
+        ListNode temp=result;
+        
+        while(f!=null && s!=null){
+            // if(f.val==s.val){
+            //     temp.next=f;
+            //     f=f.next;
+            //     s=s.next;
+            //     temp=temp.next;
+            // }else 
+            if(f.val>s.val){
+                temp.next=s;
+                s=s.next;
+                temp=temp.next;
+            }else{
+                temp.next=f;
+                f=f.next;
+                temp=temp.next;
+            }
         }
         
-        ListNode result=l1;
-        while(l1!=null && l2!=null){
-            ListNode tmp=null;
-            while(l1!=null && l1.val<=l2.val){
-                tmp=l1;
-                l1=l1.next;
-            }tmp.next=l2;
-            
-            //swappng funtion
-            ListNode temp=l1;
-            l1=l2;
-            l2=temp;
-            
+        while(f!=null){
+            temp.next=f;
+            f=f.next;
+            temp=temp.next;
         }
         
-        return result;
+        while(s!=null){
+            temp.next=s;
+            s=s.next;
+            temp=temp.next;
+        }
+        return result.next;
     }
 }
