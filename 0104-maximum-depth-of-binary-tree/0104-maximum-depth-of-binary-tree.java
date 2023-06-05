@@ -21,12 +21,12 @@ class Solution {
        } 
         
         int left=maxDepth(root.left);
-        left++;
+       // left++;
         
         int right=maxDepth(root.right);
-        right++;
+        //right++;
         
         
-        return Math.max(left,right);
+        return Math.max(left,right)+1;
     }
 }
