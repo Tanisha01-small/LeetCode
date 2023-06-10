@@ -11,7 +11,7 @@ class Solution {
                 continue;
             }
             if(arr[i]>target){
-                break;
+                continue;
              }
             ds.add(arr[i]);
             findComb(target-arr[i],arr,i+1,ds,ans);
