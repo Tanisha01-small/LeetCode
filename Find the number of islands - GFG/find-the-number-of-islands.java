@@ -53,14 +53,14 @@ class Solution {
         
         visited[i][j]=true;
         
-        drawGraph(arr,i-1,j,visited);
-        drawGraph(arr,i,j+1,visited);
-        drawGraph(arr,i,j-1,visited);
-        drawGraph(arr,i+1,j,visited);
-        drawGraph(arr,i-1,j-1,visited);
-        drawGraph(arr,i+1,j+1,visited);
-        drawGraph(arr,i+1,j-1,visited);
-        drawGraph(arr,i-1,j+1,visited);
+        for(int r=-1;r<=1;r++){
+            for(int c=-1;c<=1;c++){
+                int rn=i+r;
+                int cn=j+c;
+                drawGraph(arr,rn,cn,visited);
+            }
+        }
+      
     }
 
 }
