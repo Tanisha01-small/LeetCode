@@ -31,25 +31,26 @@ class GFG {
 }
 // } Driver Code Ends
 
-class Pair{
-    int value;
-    int vp;
-    Pair(int _value,int _vp){
-        this.value=_value;
-        this.vp=_vp;
-    }
-}
+// class Pair{
+//     int value;
+//     int vp;
+//     Pair(int _value,int _vp){
+//         this.value=_value;
+//         this.vp=_vp;
+//     }
+// }
 class Solution {
     // Function to detect cycle in an undirected graph.
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
+        
         boolean[] visited=new boolean[V];
         for(int i=0;i<V;i++){
             visited[i]=false;
         }
         for(int i=0;i<V;i++){
             if(!visited[i]){
-               if(bfs(i,adj,visited)){
+               if(/*bfs(i,adj,visited*/dfs(i,adj,visited,-1)){
                     return true;
                 }
             }
@@ -57,25 +58,40 @@ class Solution {
         return false;
     }
     
-    public boolean bfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] visited){
-        visited[node]=true;
-        Queue<Pair> q=new LinkedList<>();
-        q.add(new Pair(node,-1));
+    // public boolean bfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] visited){
+    //     visited[node]=true;
+    //     Queue<Pair> q=new LinkedList<>();
+    //     q.add(new Pair(node,-1));
         
-        while(!q.isEmpty()){
-            int it=q.peek().value;
-            int parent=q.peek().vp;
-            q.poll();
+    //     while(!q.isEmpty()){
+    //         int it=q.peek().value;
+    //         int parent=q.peek().vp;
+    //         q.poll();
             
-            for(int adjnode:adj.get(it)){
-                if(visited[adjnode]==false){
+    //         for(int adjnode:adj.get(it)){
+    //             if(visited[adjnode]==false){
+    //                 visited[adjnode]=true;
+    //                 q.add(new Pair(adjnode,it));
+    //             }else if(parent!=adjnode){
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+    
+       public boolean dfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] visited,int parent){
+        visited[node]=true;
+    
+            for(int adjnode:adj.get(node)){
+                if(visited[adjnode]==false ){
                     visited[adjnode]=true;
-                    q.add(new Pair(adjnode,it));
-                }else if(parent!=adjnode){
+                    if(dfs(adjnode,adj,visited,node))return true;
+                }else if(adjnode!=parent){
                     return true;
                 }
             }
-        }
+        
         return false;
     }
 }
