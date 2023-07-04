@@ -49,31 +49,33 @@ class Solution
         
          for(int i=0;i<V;i++){
             if(visited[i]==-1){
-                if(bfs(visited,i,adj,V)==false)return false;
+                //if(bfs(visited,i,adj,V)==false)return false;
+                if(dfs(visited,i,adj,V,0)==false)return false;
             }
         }
         
         return true;
     }
     // 0 and 1 for painting 
-    public boolean bfs(int[] visited,int node,ArrayList<ArrayList<Integer>>adj,int V){
-        Queue<Integer> q=new LinkedList<>();
-        q.add(node);
-        visited[node]=0;
+    public boolean dfs(int[] visited,int node,ArrayList<ArrayList<Integer>>adj,int V,int color){
+       // Queue<Integer> q=new LinkedList<>();
+        //q.add(node);
+        visited[node]=color;
         
-        while(!q.isEmpty()){
-            int n=q.peek();
-            q.poll();
+        // while(!q.isEmpty()){
+        //     int n=q.peek();
+        //     q.poll();
             
-            for(int it:adj.get(n)){
+            for(int it:adj.get(node)){
                 if(visited[it]==-1){
-                    visited[it]=1-visited[n];
-                    q.add(it);
-                }else if(visited[it]==visited[n]){
+                    //visited[it]=1-color;
+                    //q.add(it);
+                    if(dfs(visited,it,adj,V,1-color)==false)return false;
+                }else if(visited[it]==color){
                     return false;
                 }
             }
-        }
+        //}
         
         return true;
     }
