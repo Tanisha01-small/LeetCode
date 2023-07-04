@@ -83,12 +83,13 @@ class Solution
     
     public static void dfs( ArrayList<ArrayList<Integer>> adj,int node,Stack<Integer> s,int[] visited){
         visited[node]=1;
-        s.push(node);
         
         for(int it:adj.get(node)){
             if(visited[it]==0){
                 dfs(adj,it,s,visited);
             }
         }
+        s.push(node);
+        
     }
 }
