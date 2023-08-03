@@ -45,7 +45,8 @@ class Solution
         M[1]=Math.max(arr[0],arr[1]);
         
         for(int i=2;i<n;i++){
-            M[i]=(M[i-1]>M[i-2]+arr[i])?M[i-1]:M[i-2]+arr[i];
+           // M[i]=(M[i-1]>M[i-2]+arr[i])?M[i-1]:M[i-2]+arr[i];
+           M[i]=Math.max(M[i-1],M[i-2]+arr[i]);
         }
         
         return M[n-1];
